@@ -1,0 +1,5 @@
+{
+  "image": "diazaji/debian:clang",
+  "features": {
+  }
+}
