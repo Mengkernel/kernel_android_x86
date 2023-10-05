@@ -1,0 +1,16 @@
+env:
+  TELEGRAM_TOKEN: ENCRYPTED[c4fa64a5dce8a2214a2b9a6d94736ea42b18c6e3ccf0c1fefcb082a6b2e9aded6a0224bc3db6c74dcd1ebb4ce87ae06a]
+  GCC_IGNORE_WERROR: 1
+  TZ: "Asia/Jakarta"
+  CIRRUS_CLONE_DEPTH: 10
+container:
+  image: diazaji/debian:kernel
+  cpu: 8
+  memory: 16G
+clang_task:
+  name: Compile Kernel
+  timeout_in: 69m
+  only_if: $CIRRUS_BRANCH == 'kernel-4.19-beta'
+  script:
+    - wget -qO build.sh https://raw.githubusercontent.com/Diaz1401/build-script/x86/build.sh
+    - bash build.sh clang beta
