@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+echo "Regenerate defconfig ..."
+mkdir out || exit 0
+make android-x86_64_defconfig LLVM=1 O=out || exit 0
+mv out/.config arch/x86/configs/android-x86_64_defconfig || exit 0
+rm -rf out
+echo "Commiting ..."
+read -p "Enter commit message: " message
+git add arch/x86/configs/android-x86_64_defconfig
+git commit -sm "x86: configs: android-x86_64: $message"
